@@ -13,6 +13,7 @@ import DesktopWindowsIcon from '@material-ui/icons/DesktopWindows';
 import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
 import ChevronRightIcon from '@material-ui/icons/ChevronRight';
 import PersonIcon from '@material-ui/icons/Person';
+import InfoIcon from '@material-ui/icons/Info';
 
 const drawerWidth = 240;
 
@@ -80,6 +81,15 @@ function DrawerInsoel(props){
                         </ListItemIcon>
                         <Link to="/Productos">
                             <ListItemText primary={"Productos"}/>
+                        </Link>
+                    </ListItem>
+
+                    <ListItem>
+                        <ListItemIcon>
+                            <InfoIcon/>
+                        </ListItemIcon>
+                        <Link to="/SobreNosotros">
+                            <ListItemText primary={"SobreNosostros"}/>
                         </Link>
                     </ListItem>
                 </List>
