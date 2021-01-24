@@ -6,10 +6,14 @@ import {Grid, makeStyles,
         TextField,
         InputAdornment,
         IconButton,
-        Button} from '@material-ui/core';
+        Button,
+        FormControlLabel,
+        Checkbox,
+        Typography} from '@material-ui/core';
 import {AccountCircle,
         Visibility,
         VisibilityOff} from '@material-ui/icons';
+import { Link } from 'react-router-dom';
 
 const useStyles = makeStyles((theme) => ({
     gridContainer:{
@@ -28,7 +32,8 @@ const usuario = {
     id_usuario: 0,
     username : '',
     password : '',
-    showPassword : false
+    showPassword : false,
+    rememberme:false
 }
 
 function Login() {
@@ -37,10 +42,14 @@ function Login() {
     const [usuarioState, setUsuarioState] = useState(usuario);
 
 
-    const handleChange = (props) => (event) => {
+    const handleChange = (event) => {
+        const target = event.target;
+        const value = target.type === 'checkbox' ? target.checked : target.value;
+        const name = target.name;
+        console.log(name,value);
         setUsuarioState({
             ...usuarioState,
-            [props]: event.target.value 
+            [name]: value 
         });
     }
 
@@ -55,6 +64,11 @@ function Login() {
         event.preventDefault();
     }
 
+    const handleSubmit = (event) => {
+        console.log(usuarioState);
+        event.preventDefault();
+    }
+
     return (
         <Grid 
             container 
@@ -66,9 +80,10 @@ function Login() {
                 <Card className = {classes.cardRoot}>
                     <CardHeader title="Login"/>
                 <CardContent>
-                    <form autoComplete="off">
+                    <form  onSubmit={handleSubmit} autoComplete="off">
                         <TextField
-                            className={classes.formMargin} 
+                            className={classes.formMargin}
+                            name="username"
                             label="required *"
                             placeholder="Username"
                             InputProps={{
@@ -78,10 +93,12 @@ function Login() {
                                     </InputAdornment>
                                 ),
                             }}
+                            onChange={handleChange}
                         />
 
                         <TextField
                             className={classes.formMargin}
+                            name="password"
                             label="required *"
                             placeholder="Password"
                             type={usuarioState.showPassword ? 'text' : 'password'}
@@ -98,15 +115,40 @@ function Login() {
                                     </InputAdornment>
                                 ),
                             }}
+                            onChange={handleChange}
+                        />
+
+                        <FormControlLabel
+                            control={
+                            <Checkbox
+                                checked={usuarioState.rememberme}
+                                name="rememberme"
+                                color="primary"
+                                onClick={handleChange}
+                            />
+                            }
+                            label="Recordarme"
                         />
 
                         <Button
                             variant="contained"
                             color="primary"
+                            type="submit"
                             fullWidth
                             className={classes.formMargin}>
                                 login
                         </Button>
+
+                        <Typography>
+                            <Link to="/" href="www.google.com"> Olvidaste la constraseña</Link>
+                        </Typography>
+                        
+                        <Typography>
+                            Tienes una Cuenta?
+                            <Link to="/" href="www.google.com">
+                                Sing up
+                            </Link>
+                        </Typography>
                     </form>
                 </CardContent>
                 </Card>
