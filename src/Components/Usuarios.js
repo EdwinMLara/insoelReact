@@ -1,7 +1,14 @@
-import { Grid, makeStyles} from '@material-ui/core'
+import { Grid, makeStyles, Paper, 
+    Table, TableBody, 
+    TableCell, TableContainer, 
+    TableHead, TableRow,
+    withStyles} from '@material-ui/core'
 import axios from 'axios';
 import React,{useState,useEffect} from 'react'
-import UserCardInsoel from './UserCardInsoel';
+
+import DeleteIcon from '@material-ui/icons/Delete';
+import EditIcon from '@material-ui/icons/Edit';
+
 
 
 const baseUrl = "http://localhost/insoelApi/";
@@ -24,9 +31,37 @@ const bodyGetUsers = {
 
     }
 }
+
+const StyledTableCell = withStyles((theme) => ({
+    head:{
+        backgroundColor: theme.palette.common.black,
+        color: theme.palette.common.white
+    },
+    body:{
+        fontSize: 14
+    }
+}))(TableCell);
+
+const StyledTableRow = withStyles((theme) => ({
+    root:{
+        '&:nth-of-type(odd)' : {
+            backgroundColor : theme.palette.action.hover
+        }
+    }
+}))(TableRow);
+
 const useStyles = makeStyles((theme) =>({
-    gridContainer:{
-        marginTop: theme.spacing(6)
+    root:{
+        marginTop:theme.spacing(8)
+    },
+    table:{
+        minWidth:600
+    },
+    iconLeft:{
+        flex:1
+    },
+    iconRight:{
+        flex:1
     }
 }));
 
@@ -64,25 +99,44 @@ function Usuarios() {
     },[]);
 
     return (
-        <Grid container className={classes.gridContainer}  justify='center' spacing={4}>      
-            {usuarios.map(usuario => {
-                let letter = usuario.username.substring(0,1);
-                let Count;
-                if(usuario.typeCount === '0'){
-                    Count = 'Administrador';
-                }else{
-                    Count = 'Invitado';
-                }
-                console.log(Count);
-                return <Grid item xs={12} sm={6} md={4}>
-                            <UserCardInsoel 
-                                key={usuario.id_usuario} 
-                                username={usuario.username} 
-                                letter={letter} 
-                                typecount={Count}/>
-                        </Grid>
-            })}
-        </Grid>  
+        <TableContainer className={classes.root} component={Paper}>
+            <Table className={classes.table}>
+                <TableHead>
+                    <TableRow>
+                        <StyledTableCell>Usuario</StyledTableCell>
+                        <StyledTableCell>Contraseña</StyledTableCell>
+                        <StyledTableCell>Tipo de Cuenta</StyledTableCell>
+                        <StyledTableCell>Fecha</StyledTableCell>
+                        <StyledTableCell>Acciones</StyledTableCell>
+                    </TableRow>
+                </TableHead>
+                <TableBody>
+                    {usuarios.map(usuario => {
+                        let Count;
+                        (usuario.typeCount === '0') ? Count = 'Administrador': Count = 'Invitado'
+                        console.log(Count);
+                        return (
+                            <StyledTableRow key={usuario.id_usuario}>
+                                <StyledTableCell>{usuario.username}</StyledTableCell>
+                                <StyledTableCell>{usuario.password}</StyledTableCell>
+                                <StyledTableCell>{Count}</StyledTableCell>
+                                <StyledTableCell>{usuario.time}</StyledTableCell>
+                                <StyledTableCell>
+                                    <Grid container>
+                                        <Grid item xs={6}>
+                                            <EditIcon/>
+                                        </Grid>
+                                        <Grid item xs={6}>
+                                            <DeleteIcon/>
+                                        </Grid>
+                                    </Grid>
+                                </StyledTableCell>
+                            </StyledTableRow>
+                        )
+                    })}
+                </TableBody>
+            </Table>
+        </TableContainer>  
     )
 }
 
