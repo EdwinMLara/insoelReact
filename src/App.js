@@ -14,6 +14,7 @@ import NavBarInsoel from './Components/NavBarInsoel';
 import DrawerInsoel from './Components/DrawerInsoel';
 import Usuarios from './Components/Usuarios';
 import Login from './Components/Login';
+import InicialPage from './Components/InicialPage';
 
 const drawerWidth = 240;
 
@@ -67,12 +68,16 @@ function App() {
         <NavBarInsoel onClick={(stateDrawer) => handleOpenDrawer(stateDrawer)} state={stateDrawer} />
         <DrawerInsoel onClick={(stateDrawer) => handleCloseDrawer(stateDrawer)} state={stateDrawer}/>
         
-        {/*<main 
+        <main 
           className={clsx(classes.content, {
           [classes.contentShift]: stateDrawer})}>
         
           <Switch>
             <Route exact path="/">
+              <InicialPage/>
+            </Route>
+
+            <Route path="/Usuarios">
               <Usuarios className={classes.usuariosdiv}/>
             </Route>
 
@@ -83,10 +88,12 @@ function App() {
             <Route path="/Productos">
               <Productos/>
             </Route>
-          </Switch>
-          </main>*/}
 
-          <Login/>
+            <Route path="/Login">
+              <Login/>
+            </Route>
+          </Switch>
+        </main>
       </Router>
     </div>
   );

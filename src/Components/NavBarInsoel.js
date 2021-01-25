@@ -8,6 +8,8 @@ import NotificationsIcon from '@material-ui/icons/Notifications';
 import MenuIcon from '@material-ui/icons/Menu';
 
 import insoellogo from '../Images/Insoel2.png';
+
+import {Link} from 'react-router-dom';
 const drawerWidth = 240;
 const useStyles = makeStyles(theme => ({
     grow:{
@@ -72,8 +74,10 @@ function NavBarInsoel(props){
                             <NotificationsIcon></NotificationsIcon>
                         </Badge>
                     </IconButton>
-
-                    <Button color="inherit">Login</Button>
+                    
+                    <Link to="/Login" color="inherit">
+                        <Button color="inherit">Login</Button>
+                    </Link>
                 </Toolbar>
             </AppBar>
         </div>
