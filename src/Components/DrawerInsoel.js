@@ -61,7 +61,7 @@ function DrawerInsoel(props){
                         <ListItemIcon>
                             <PersonIcon/>
                         </ListItemIcon>
-                        <Link to="/" style={{ textDecoration: 'none' }}>
+                        <Link to="/Usuarios" style={{ textDecoration: 'none' }}>
                             <ListItemText primary={"Usuarios"}/>
                         </Link>
                     </ListItem>
