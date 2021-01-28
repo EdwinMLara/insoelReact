@@ -2,7 +2,7 @@ import React from 'react';
 import clsx from 'clsx';
 
 import {AppBar,Button,makeStyles,IconButton,
-    Toolbar, Badge} from '@material-ui/core'
+    Toolbar, Badge, Typography} from '@material-ui/core'
 
 import NotificationsIcon from '@material-ui/icons/Notifications';
 import MenuIcon from '@material-ui/icons/Menu';
@@ -61,7 +61,8 @@ function NavBarInsoel(props){
                         <MenuIcon/>
                     </IconButton>
 
-                    <img src={insoellogo} className={classes.insoelImg} alt="insoelLogo"></img>
+                    {/*<img src={insoellogo} className={classes.insoelImg} alt="insoelLogo"></img>*/}
+                    <Typography variant="h5">INSOEL</Typography>
 
                     <div className={classes.grow}></div>
 
